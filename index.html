@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembelajaran Perlengkapan Rumah Tangga</title>
+    <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="h-full bg-gradient-to-br from-amber-50 via-orange-50 to-yellow-50 overflow-auto">
+    <div id="app" class="min-h-full w-full p-4 md:p-6">
+        
+        <div id="mainMenu" class="max-w-6xl mx-auto">
+            <header class="text-center mb-8">
+                <h1 id="mainTitle" class="text-3xl md:text-4xl font-extrabold text-amber-800 mb-2">🏠 Belajar Nama Benda dalam Bahasa Inggris</h1>
+                <p id="instructionText" class="text-amber-600 text-lg">Klik ruangan untuk menjelajahi dan belajar nama-nama benda!</p>
+            </header>
+
+            <div class="bg-white/80 rounded-full p-2 mb-8 shadow-lg max-w-md mx-auto">
+                <div class="flex items-center gap-3">
+                    <span class="text-2xl">📚</span>
+                    <div class="flex-1 bg-amber-100 rounded-full h-4 overflow-hidden">
+                        <div id="progressBar" class="progress-fill h-full bg-gradient-to-r from-green-400 to-emerald-500 rounded-full" style="width: 0%"></div>
+                    </div>
+                    <span id="progressText" class="text-amber-700 font-bold text-sm">0/0</span>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
+                <div class="room-card bg-white rounded-2xl p-4 shadow-lg border-2 border-amber-200 hover:border-amber-400" onclick="openRoom('livingRoom')">
+                    <div class="text-5xl mb-3 text-center">🛋️</div>
+                    <h3 class="font-bold text-amber-800 text-center text-lg">Ruang Tamu</h3>
+                    <div class="mt-2 text-center"><span class="inline-block bg-amber-100 text-amber-700 text-xs px-2 py-1 rounded-full" id="livingRoomCount">0/8 item</span></div>
+                </div>
+                <div class="room-card bg-white rounded-2xl p-4 shadow-lg border-2 border-orange-200 hover:border-orange-400" onclick="openRoom('diningRoom')">
+                    <div class="text-5xl mb-3 text-center">🍽️</div>
+                    <h3 class="font-bold text-orange-800 text-center text-lg">Ruang Makan</h3>
+                    <div class="mt-2 text-center"><span class="inline-block bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded-full" id="diningRoomCount">0/8 item</span></div>
+                </div>
+                <div class="room-card bg-white rounded-2xl p-4 shadow-lg border-2 border-blue-200 hover:border-blue-400" onclick="openRoom('bedroom')">
+                    <div class="text-5xl mb-3 text-center">🛏️</div>
+                    <h3 class="font-bold text-blue-800 text-center text-lg">Kamar Tidur</h3>
+                    <div class="mt-2 text-center"><span class="inline-block bg-blue-100 text-blue-700 text-xs px-2 py-1 rounded-full" id="bedroomCount">0/8 item</span></div>
+                </div>
+                <div class="room-card bg-white rounded-2xl p-4 shadow-lg border-2 border-cyan-200 hover:border-cyan-400" onclick="openRoom('bathroom')">
+                    <div class="text-5xl mb-3 text-center">🚿</div>
+                    <h3 class="font-bold text-cyan-800 text-center text-lg">Kamar Mandi</h3>
+                    <div class="mt-2 text-center"><span class="inline-block bg-cyan-100 text-cyan-700 text-xs px-2 py-1 rounded-full" id="bathroomCount">0/8 item</span></div>
+                </div>
+                <div class="room-card bg-white rounded-2xl p-4 shadow-lg border-2 border-emerald-200 hover:border-emerald-400" onclick="openRoom('prayerRoom')">
+                    <div class="text-5xl mb-3 text-center">🕌</div>
+                    <h3 class="font-bold text-emerald-800 text-center text-lg">Ruang Sholat</h3>
+                    <div class="mt-2 text-center"><span class="inline-block bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full" id="prayerRoomCount">0/6 item</span></div>
+                </div>
+                <div class="room-card bg-white rounded-2xl p-4 shadow-lg border-2 border-red-200 hover:border-red-400" onclick="openRoom('kitchen')">
+                    <div class="text-5xl mb-3 text-center">👨‍🍳</div>
+                    <h3 class="font-bold text-red-800 text-center text-lg">Dapur</h3>
+                    <div class="mt-2 text-center"><span class="inline-block bg-red-100 text-red-700 text-xs px-2 py-1 rounded-full" id="kitchenCount">0/10 item</span></div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button onclick="startQuiz()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white font-bold py-3 px-8 rounded-full shadow-lg hover:scale-105 transition-all">🎯 Mulai Kuis!</button>
+            </div>
+        </div>
+
+        <div id="roomView" class="hidden max-w-4xl mx-auto">
+            <button onclick="goBack()" class="back-btn flex items-center gap-2 text-amber-700 font-bold mb-4">
+                <span class="text-2xl">←</span> <span>Kembali ke Menu</span>
+            </button>
+            <div id="roomHeader" class="text-center mb-4">
+                <h2 id="roomTitle" class="text-2xl md:text-3xl font-bold text-amber-800"></h2>
+                <p id="roomSubtitle" class="text-amber-600"></p>
+            </div>
+            <div id="roomScene" class="room-scene w-full aspect-video relative mb-6 shadow-xl">
+                <div class="wall-pattern"></div>
+                <div class="floor"></div>
+            </div>
+            <div class="bg-white/90 rounded-2xl p-4 shadow-lg">
+                <h3 class="font-bold text-amber-800 mb-3 text-lg">📝 Daftar Benda / Items List</h3>
+                <div id="itemsList" class="grid grid-cols-2 md:grid-cols-4 gap-2"></div>
+            </div>
+        </div>
+
+        <div id="quizView" class="hidden max-w-2xl mx-auto">
+            <div class="bg-white rounded-3xl p-6 md:p-8 shadow-xl">
+                <div id="quizContent">
+                    <div class="text-center mb-6">
+                        <h2 class="text-2xl font-bold text-purple-800 mb-2">🎯 Kuis Nama Benda</h2>
+                        <p id="quizProgress" class="text-purple-600"></p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-6xl mb-4" id="quizEmoji"></div>
+                        <p id="quizHint" class="text-amber-600 text-sm mb-4"></p>
+                        <div id="quizOptions" class="grid grid-cols-2 gap-3 max-w-md mx-auto"></div>
+                    </div>
+                </div>
+                <div id="quizResult" class="hidden text-center py-8">
+                    <div class="text-6xl mb-4">🎉</div>
+                    <h3 class="text-2xl font-bold text-purple-800 mb-2">Hasil Kuis</h3>
+                    <p id="quizScore" class="text-xl text-purple-600 mb-4"></p>
+                    <button onclick="startQuiz()" class="bg-purple-500 text-white font-bold py-2 px-6 rounded-full mr-2">🔄 Ulangi</button>
+                    <button onclick="goBack()" class="bg-amber-500 text-white font-bold py-2 px-6 rounded-full">🏠 Menu Utama</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="tooltip" class="tooltip hidden fixed bg-gray-900 text-white px-4 py-3 rounded-xl shadow-xl z-50 pointer-events-none">
+        <div class="text-center">
+            <p id="tooltipEnglish" class="font-bold text-lg text-yellow-300"></p>
+            <p id="tooltipIndonesian" class="text-gray-300 text-sm"></p>
+            <p id="tooltipEmoji" class="text-3xl mt-1"></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

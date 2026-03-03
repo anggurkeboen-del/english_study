@@ -1,0 +1,84 @@
+* {
+    font-family: 'Nunito', sans-serif;
+    box-sizing: border-box;
+}
+
+.room-card {
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.room-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.item-dot {
+    animation: pulse 2s infinite;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    z-index: 10;
+}
+
+.item-dot:hover {
+    transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+@keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255, 200, 0, 0.7); }
+    50% { box-shadow: 0 0 0 8px rgba(255, 200, 0, 0); }
+}
+
+.tooltip {
+    animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.room-scene {
+    position: relative;
+    background: linear-gradient(180deg, #fef9c3 0%, #fef3c7 100%);
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.floor {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(180deg, #d4a574 0%, #b8956a 100%);
+}
+
+.wall-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 30%;
+    background-image: repeating-linear-gradient( 
+        90deg, transparent, transparent 50px, rgba(0,0,0,0.03) 50px, rgba(0,0,0,0.03) 51px 
+    );
+}
+
+.back-btn:hover {
+    transform: translateX(-3px);
+}
+
+.learned-badge {
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    0% { transform: scale(0); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.progress-fill {
+    transition: width 0.5s ease;
+}
